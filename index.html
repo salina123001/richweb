@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>命運計算器</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* A good default sans-serif font */
+            background-color: #111827; /* bg-gray-900 */
+            color: #d1d5db; /* text-gray-300 */
+            position: relative; /* For sparkle container positioning */
+            overflow-x: hidden; /* Prevent horizontal scroll from sparkles if any */
+        }
+
+        /* Keyframes for LoadingSpinner */
+        @keyframes bounce_custom {
+          0%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-6px); }
+        }
+
+        /* Custom fade-in animation from App.tsx */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+        .fade-in-section-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom glowing shadow utility classes */
+        .hover-glowing-shadow-pink:hover {
+          box-shadow: 0 0 20px 5px rgba(236, 72, 153, 0.6); /* pink-500: #ec4899 */
+        }
+        .hover-glowing-shadow-purple:hover {
+          box-shadow: 0 0 20px 5px rgba(168, 85, 247, 0.6); /* purple-500: #a855f7 */
+        }
+        .glowing-shadow-purple {
+            /* Applied in CalculatorSection form and ContactSection form */
+            box-shadow: 0 0 25px 5px rgba(168, 85, 247, 0.2); /* Softer purple glow */
+        }
+
+        /* Floating Sparkles */
+        #sparkle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; 
+            overflow: hidden; 
+            z-index: 0; /* Behind navbar/footer but above body bg */
+        }
+
+        .sparkle {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparkle-animation 5s infinite linear;
+        }
+
+        @keyframes sparkle-animation {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; } /* Start from bottom */
+            20% { opacity: 0.8; } /* Fade in */
+            80% { opacity: 0.8; } /* Stay visible */
+            100% { transform: translateY(-10vh) scale(0.5); opacity: 0; } /* Move to top and fade out */
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.6.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <noscript>您需要啟用 JavaScript 來執行此應用程式。</noscript>
+    <div id="sparkle-container"></div>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+</body>
+</html>
